@@ -32,7 +32,7 @@ public class MessageEndpoint implements MarketMessagingB2BInboundServiceV01PortT
     }
 
     @Override
-    public PeekMessageResponse peekMessage(PeekMessageRequestType parameters) throws Exception {
+    public PeekMessageResponseType peekMessage(PeekMessageRequestType parameters) throws Exception {
         return service.peekMessage(parameters);
     }
 }
