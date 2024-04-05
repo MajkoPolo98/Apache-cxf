@@ -50,8 +50,77 @@
    </xs:complexType>
    <xs:complexType name="PeekMessageResponse_Type">
     <xs:sequence>
-     <xs:element name="MessageContainer" type="b2b:ResponseMessageContainer_Type"
-                 minOccurs="0" />
+     <xs:element name="PeekMessageResponse">
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element name="MessageContainer">
+         <xs:complexType>
+          <xs:sequence>
+           <xs:element type="xs:string" name="DocumentReferenceNumber"/>
+           <xs:element name="PeekMessageResponsePayload">
+            <xs:complexType>
+             <xs:sequence>
+              <xs:element name="OperationResult">
+               <xs:complexType>
+                <xs:sequence>
+                 <xs:element name="Header">
+                  <xs:complexType>
+                   <xs:sequence>
+                    <xs:element type="xs:string" name="MessageId"/>
+                    <xs:element type="xs:string" name="SenderMessageId"/>
+                    <xs:element type="xs:string" name="MessageType"/>
+                    <xs:element type="xs:string" name="MessageTypeResponsibleOrganization"/>
+                    <xs:element type="xs:string" name="MessageTimestamp"/>
+                    <xs:element type="xs:string" name="PhysicalSenderId"/>
+                    <xs:element type="xs:short" name="PhysicalSenderIdResponsibleOrganization"/>
+                    <xs:element type="xs:string" name="JuridicalSenderId"/>
+                    <xs:element type="xs:short" name="JuridicalSenderIdResponsibleOrganization"/>
+                    <xs:element type="xs:string" name="PhysicalRecipientId"/>
+                    <xs:element type="xs:short" name="PhysicalRecipientIdResponsibleOrganization"/>
+                    <xs:element type="xs:string" name="JuridicalRecipientId"/>
+                    <xs:element type="xs:short" name="JuridicalRecipientIdResponsibleOrganization"/>
+                   </xs:sequence>
+                  </xs:complexType>
+                 </xs:element>
+                 <xs:element name="ProcessEnergyContext">
+                  <xs:complexType>
+                   <xs:sequence>
+                    <xs:element type="xs:string" name="BusinessProcess"/>
+                    <xs:element type="xs:string" name="BusinessProcessTypeResponsibleOrganization"/>
+                    <xs:element type="xs:string" name="SenderBusinessRoleIdentifier"/>
+                    <xs:element type="xs:string" name="SenderBusinessRoleResponsibleOrganization"/>
+                    <xs:element type="xs:byte" name="IndustryClassificationId"/>
+                    <xs:element type="xs:string" name="BusinessProcessMessageType"/>
+                   </xs:sequence>
+                  </xs:complexType>
+                 </xs:element>
+                 <xs:element name="Payload">
+                  <xs:complexType>
+                   <xs:sequence>
+                    <xs:element name="Result">
+                     <xs:complexType>
+                      <xs:sequence>
+                       <xs:element type="xs:string" name="ProcessInstanceId"/>
+                       <xs:element type="xs:string" name="ErrorCode"/>
+                      </xs:sequence>
+                     </xs:complexType>
+                    </xs:element>
+                   </xs:sequence>
+                  </xs:complexType>
+                 </xs:element>
+                </xs:sequence>
+                <xs:attribute type="xs:string" name="msg_R_1"/>
+               </xs:complexType>
+              </xs:element>
+             </xs:sequence>
+            </xs:complexType>
+           </xs:element>
+          </xs:sequence>
+         </xs:complexType>
+        </xs:element>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
     </xs:sequence>
    </xs:complexType>
    <xs:complexType name="SendMessageRequest_Type">

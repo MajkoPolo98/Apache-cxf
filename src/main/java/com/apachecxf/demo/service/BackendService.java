@@ -1,41 +1,32 @@
 package com.apachecxf.demo.service;
 
 import cms.b2b.v01.*;
-import com.apachecxf.demo.domain.PeekMessageResponse;
-import com.apachecxf.demo.tools.StringToElementConverter;
+import jakarta.xml.ws.BindingType;
+import jakarta.xml.ws.soap.SOAPBinding;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 @Service
 public class BackendService {
 
-    PeekMessageResponseType  peekMessage(PeekMessageRequestType peekMessageRequest) throws Exception {
-    PeekMessageResponse response = new PeekMessageResponse();
+    public PeekMessageResponseType  peekMessage(PeekMessageRequestType peekMessageRequest) {
     PeekMessageResponseType responseType = new PeekMessageResponseType();
-        ResponseMessageContainerType containerType = new ResponseMessageContainerType();
-        ResponsePayloadType payloadType = new ResponsePayloadType();
-        DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        Document xmlDoc = documentBuilder.newDocument();
+    PeekMessageResponseType.PeekMessageResponse peekMessageResponse = new PeekMessageResponseType.PeekMessageResponse();
+        PeekMessageResponseType.PeekMessageResponse.MessageContainer messageContainer = new PeekMessageResponseType.PeekMessageResponse.MessageContainer();
+        PeekMessageResponseType.PeekMessageResponse.MessageContainer.PeekMessageResponsePayload peekMessageResponsePayload = new PeekMessageResponseType.PeekMessageResponse.MessageContainer.PeekMessageResponsePayload();
+        PeekMessageResponseType.PeekMessageResponse.MessageContainer.PeekMessageResponsePayload.OperationResult operationResult = new PeekMessageResponseType.PeekMessageResponse.MessageContainer.PeekMessageResponsePayload.OperationResult();
+        PeekMessageResponseType.PeekMessageResponse.MessageContainer.PeekMessageResponsePayload.OperationResult.ProcessEnergyContext processEnergyContext = new PeekMessageResponseType.PeekMessageResponse.MessageContainer.PeekMessageResponsePayload.OperationResult.ProcessEnergyContext();
+        processEnergyContext.setBusinessProcess("HelloWorld");
+        processEnergyContext.setBusinessProcessMessageType("HelloWorld");
+        processEnergyContext.setBusinessProcessTypeResponsibleOrganization("HelloWorld");
+        PeekMessageResponseType.PeekMessageResponse.MessageContainer.PeekMessageResponsePayload.OperationResult.Payload payload = new PeekMessageResponseType.PeekMessageResponse.MessageContainer.PeekMessageResponsePayload.OperationResult.Payload();
+        operationResult.setProcessEnergyContext(processEnergyContext);
+        PeekMessageResponseType.PeekMessageResponse.MessageContainer.PeekMessageResponsePayload.OperationResult.Payload.Result result = new PeekMessageResponseType.PeekMessageResponse.MessageContainer.PeekMessageResponsePayload.OperationResult.Payload.Result();
+        result.setErrorCode("Error Code");
 
-        Element root = xmlDoc.createElement("Hello");
-
-        Node item = null;
-
-        item = xmlDoc.createElement("Hello");
-        item.appendChild(xmlDoc.createTextNode("World"));
-
-        root.appendChild(item);
-        xmlDoc.appendChild(root);
-
-        payloadType.setAny(root);
-
-        containerType.setPayload(payloadType);
-        responseType.setMessageContainer(containerType);
+        peekMessageResponsePayload.setOperationResult(operationResult);
+        messageContainer.setPeekMessageResponsePayload(peekMessageResponsePayload);
+        peekMessageResponse.setMessageContainer(messageContainer);
+        responseType.setPeekMessageResponse(peekMessageResponse);
 
     return responseType;
 }

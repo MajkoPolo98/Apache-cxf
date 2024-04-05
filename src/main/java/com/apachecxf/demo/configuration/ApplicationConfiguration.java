@@ -1,9 +1,9 @@
 package com.apachecxf.demo.configuration;
 
 import com.apachecxf.demo.service.MessageEndpoint;
-import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.BindingType;
 import jakarta.xml.ws.Endpoint;
+import jakarta.xml.ws.soap.SOAPBinding;
 import org.apache.cxf.Bus;
 
 import org.apache.cxf.binding.BindingConfiguration;
@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@BindingType(SOAPBinding.SOAP12HTTP_BINDING)
 public class ApplicationConfiguration {
 
     @Autowired
@@ -20,13 +21,7 @@ public class ApplicationConfiguration {
 
     @Bean
     public Endpoint endpoint(MessageEndpoint peekMessageEndpoint) {
-        EndpointImpl endpoint = new EndpointImpl(bus, peekMessageEndpoint);
-        endpoint.setBindingConfig(new BindingConfiguration() {
-            @Override
-            public String getBindingId() {
-                return "http://www.w3.org/2003/05/soap/bindings/HTTP/";//SOAPVersion.SOAP_12.httpBindingId
-            }
-        });
+        EndpointImpl endpoint = new EndpointImpl(bus, peekMessageEndpoint, SOAPBinding.SOAP12HTTP_BINDING);
         endpoint.publish("/service/message/");
         return endpoint;
     }
